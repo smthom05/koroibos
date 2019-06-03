@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     team: DataTypes.STRING
   }, {});
   Olympian.associate = function(models) {
-    
+    Olympian.hasMany(models.OlympianEvent)
+    Olympian.belongsToMany(models.Event, {through: models.OlympianEvent, foreignKey: 'OlympianId'});
   };
   return Olympian;
 };
