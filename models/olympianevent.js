@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     medal: DataTypes.STRING
   }, {});
   OlympianEvent.associate = function(models) {
-    // associations can be defined here
+    OlympianEvent.belongsTo(models.Event)
+    OlympianEvent.belongsTo(models.Olympian)
   };
   return OlympianEvent;
 };
