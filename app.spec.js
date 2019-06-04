@@ -27,4 +27,18 @@ describe('Olympics API', () => {
       })
     })
   })
+
+  describe('Test GET /api/v1/olympians?age=youngest', () => {
+    test('should return a 200 status and youngest olympians', () => {
+      return request(app).get('/api/v1/olympians?age=youngest').then(response => {
+        expect(response.status).toBe(200)
+        expect(response.body.olympians.length).toBe(1)
+        expect(Object.keys(response.body.olympians[0])).toContain('name')
+        expect(Object.keys(response.body.olympians[0])).toContain('team')
+        expect(Object.keys(response.body.olympians[0])).toContain('age')
+        expect(Object.keys(response.body.olympians[0])).toContain('sport')
+        expect(Object.keys(response.body.olympians[0])).toContain('total_medals_won')
+      })
+    })
+  })
 })
