@@ -11,14 +11,8 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      SportId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Sports',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+      sport: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
