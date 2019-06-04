@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Event', [{
+    return queryInterface.bulkInsert('Events', [{
       id: 1,
       name: "Athletics Men's 4 x 100 metres Relay",
       sport: "Athletics",
@@ -21,9 +21,10 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     }
+    ], {});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Event', null, {});
+    return queryInterface.bulkDelete('Events', null, {});
   }
 };
