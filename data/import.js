@@ -3,11 +3,10 @@ const csv = require('fast-csv');
 const pry = require('pryjs')
 const Olympian = require('../models').Olympian;
 const Event = require('../models').Event;
-const Sport = require('../models').Sport;
-const OlympianSport = require('../models').OlympianSport;
+const OlympianEvent = require('../models').OlympianEvent;
 
 let counter = 0;
-let csvStream = csv.fromPath("./olympians.csv", {headers: true})
+let csvStream = csv.fromPath("./data/olympians.csv", {headers: true})
   .on('data', function(record) {
 
     csvStream.pause();
@@ -21,44 +20,44 @@ let csvStream = csv.fromPath("./olympians.csv", {headers: true})
     let event = record.Event;
     let medal = record.Medal;
 
-    Sport.findOrCreate({
+    if (weight == 'NA') {
+      weight = null
+    }
+
+
+    Event.findOrCreate({
       where: {
-        name: sport
+        name: event,
+        sport: sport
       }
     })
-    .then(sport => {
-      Event.findOrCreate({
+    .then(event => {
+      Olympian.findOrCreate({
         where: {
-          name: event,
-          SportId: sport[0].id
+          name: name,
+          age: age,
+          sex: sex,
+          weight: weight,
+          team: team,
+          sport: sport
         }
       })
-      .then(event => {
-        Olympian.findOrCreate({
+      .then(olympian => {
+        var olympianId = olympian[0].id;
+        var eventId = event[0].id;
+        OlympianEvent.findOrCreate({
           where: {
-            name: name,
-            age: age,
-            sex: sex,
-            weight: weight,
-            team: team,
-            sport: sport
+            EventId: eventId,
+            OlympianId: olympianId,
+            medal: medal
           }
-        })
-        .then(olympian => {
-          OlympianEvent.create({
-            where: {
-              EventId: event[0].id,
-              OlympianId: olympian[0].id,
-              medal: medal
-            }
-          })
         })
       })
     })
+    counter ++;
+    csvStream.resume();
   })
-  counter ++;
-  csvStream.resume();
-  .on("end", function(){
+  .on("end", function(end){
         console.log(`Imported ${counter} files`);
   })
   .on("error", function(err){
@@ -67,4 +66,4 @@ let csvStream = csv.fromPath("./olympians.csv", {headers: true})
 
 setTimeout(function() {
   process.exit();
-}, 30000);
+}, 35000);

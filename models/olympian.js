@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Olympian.associate = function(models) {
     Olympian.hasMany(models.OlympianEvent)
-    Olympian.belongsToMany(models.Event, {through: models.OlympianEvent, foreignKey: 'OlympianId'});
+    Olympian.belongsToMany(models.Event, {through: models.OlympianEvent, foreignKey: models.OlympianId});
   };
   return Olympian;
 };
