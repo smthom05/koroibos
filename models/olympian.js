@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     sex: DataTypes.STRING,
     age: DataTypes.INTEGER,
     weight: DataTypes.INTEGER,
-    team: DataTypes.STRING
+    team: DataTypes.STRING,
+    sport: DataTypes.STRING
   }, {});
   Olympian.associate = function(models) {
     Olympian.hasMany(models.OlympianEvent)

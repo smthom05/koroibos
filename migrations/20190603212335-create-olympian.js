@@ -23,6 +23,9 @@ module.exports = {
       team: {
         type: Sequelize.STRING
       },
+      sport: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
