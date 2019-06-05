@@ -73,4 +73,16 @@ describe('Olympics API', () => {
       })
     })
   })
+
+  // Events Endpoint
+    describe('Test GET /api/v1/events', () => {
+      test('should return a 200 status and events', () => {
+        return request(app).get('/api/v1/events').then(response => {
+          expect(response.status).toBe(200)
+          expect(response.body.events.length).toBe(2)
+          expect(Object.keys(response.body.events[0])).toContain('sport')
+          expect(Object.keys(response.body.events[0])).toContain('events')
+        })
+      })
+    })
 })
