@@ -51,7 +51,7 @@ There are six separate endpoints that can be hit from this API. Each endpoint wi
           ]
         }
 
-1. **Youngest Olympians**
+2. **Youngest Olympians**
 
   `GET /api/v1/olympians?age=youngest`
 
@@ -70,7 +70,7 @@ There are six separate endpoints that can be hit from this API. Each endpoint wi
           ]
         }
 
-1. **Oldest Olympians**
+3. **Oldest Olympians**
 
   `GET /api/v1/olympians?age=oldest`
 
@@ -89,7 +89,7 @@ There are six separate endpoints that can be hit from this API. Each endpoint wi
           ]
         }
 
-1. **Olympian Stats**
+4. **Olympian Stats**
 
   `GET /api/v1/olympian_stats`
 
@@ -107,7 +107,7 @@ There are six separate endpoints that can be hit from this API. Each endpoint wi
           }
         }
 
-1. **All Events**
+5. **All Events**
 
   `GET /api/v1/events`
 
@@ -139,7 +139,7 @@ There are six separate endpoints that can be hit from this API. Each endpoint wi
            ]
         }
 
-1. **All Event Medalists**
+6. **All Event Medalists**
 
   `GET /api/v1/events/:id/medalists`
 
