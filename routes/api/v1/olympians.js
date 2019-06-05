@@ -37,29 +37,31 @@ router.get('/', function (req, res) {
       })
     })
   } else if (req.query.age === 'oldest') {
-    oldestAge = Olympian.max("age")
-    Olympian.findAll({
-      attributes: ['name', 'team', 'age', 'sport'],
-      where: {age: oldestAge},
-      include: [{
-        model: OlympianEvent,
-        where: {
-          medal: {[Op.not]: 'NA'}
-        },
-        required: false
+    Olympian.max("age")
+    .then(oldestAge => {
+      Olympian.findAll({
+        attributes: ['name', 'team', 'age', 'sport'],
+        where: {age: oldestAge},
+        include: [{
+          model: OlympianEvent,
+          where: {
+            medal: {[Op.not]: 'NA'}
+          },
+          required: false
         }
       ]
-    })
-    .then(olympians => {
-      return serializeOlympians(olympians)
-    })
-    .then(serializedOlympians => {
-      res.setHeader('Content-Type', 'application/json')
-      res.status(200).send({olympians: serializedOlympians})
-    })
-    .catch(error => {
-      res.setHeader('Content-Type', 'application/json')
-      res.status(404).send({error})
+      })
+      .then(olympians => {
+        return serializeOlympians(olympians)
+      })
+      .then(serializedOlympians => {
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200).send({olympians: serializedOlympians})
+      })
+      .catch(error => {
+        res.setHeader('Content-Type', 'application/json')
+        res.status(404).send({error})
+      })  
     })
   } else {
     Olympian.findAll({
