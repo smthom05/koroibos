@@ -74,15 +74,29 @@ describe('Olympics API', () => {
     })
   })
 
-  // Events Endpoint
-    describe('Test GET /api/v1/events', () => {
-      test('should return a 200 status and events', () => {
-        return request(app).get('/api/v1/events').then(response => {
-          expect(response.status).toBe(200)
-          expect(response.body.events.length).toBe(2)
-          expect(Object.keys(response.body.events[0])).toContain('sport')
-          expect(Object.keys(response.body.events[0])).toContain('events')
-        })
+// Events Endpoint
+  describe('Test GET /api/v1/events', () => {
+    test('should return a 200 status and events', () => {
+      return request(app).get('/api/v1/events').then(response => {
+        expect(response.status).toBe(200)
+        expect(response.body.events.length).toBe(2)
+        expect(Object.keys(response.body.events[0])).toContain('sport')
+        expect(Object.keys(response.body.events[0])).toContain('events')
       })
     })
+  })
+
+// Events Endpoint
+  describe('Test GET /api/v1/events/:id/medalists', () => {
+    test('should return a 200 status and medalists', () => {
+      return request(app).get('/api/v1/events/1/medalists').then(response => {
+        expect(response.status).toBe(200)
+        expect(response.body.medalists.length).toBe(2)
+        expect(Object.keys(response.body)).toContain('event')
+        expect(Object.keys(response.body)).toContain('medalists')
+        expect(Object.keys(response.body.medalists[0].name)).tobe('Scott Thomas')
+        expect(Object.keys(response.body.medalists[1].name)).tobe('Tim Allen')
+      })
+    })
+  })
 })
